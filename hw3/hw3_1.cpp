@@ -8,9 +8,11 @@ int main()
 {
 	Mat image_blur, AvgImg; // blur
 	Mat image_sharp, laplacian, abs_laplacian, sharpening; // sharpening
+	Mat image_salt, mf1; // salstedPepper
 
 	image_blur = imread("assets/Lena.png");
 	image_sharp = imread("assets/moon.png", 0);
+	image_salt = imread("assets/saltnpepper.png", 0);
 
 	// Using Average Filter
 	/*
@@ -29,11 +31,20 @@ int main()
 	convertScaleAbs(laplacian, abs_laplacian);
 	sharpening = abs_laplacian + image_sharp;
 
-	imshow("Original Blur Image", image_blur);
-	imshow("Blur Image", AvgImg);
+	// Median Blur
+	/*
+	Blurs an image using the median filter
+	*/
+	medianBlur(image_salt, mf1, 9);
 
-	imshow("Original Sharpening Image", image_sharp);
-	imshow("Sharpengin Image", sharpening);
+	imshow("lena", image_blur);
+	imshow("lena_filtered", AvgImg);
+
+	imshow("moon", image_sharp);
+	imshow("moon_filtered", sharpening);
+
+	imshow("saltnpepper", image_salt);
+	imshow("slatnpepper_filtered", mf1);
 
 	waitKey(0);
 	return 0;
